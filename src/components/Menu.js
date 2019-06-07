@@ -16,6 +16,9 @@ class Menu extends Component {
             this.setState({productList:[...products]});
         })
     }
+    addToCart=()=>{
+        
+    }
     render() {
         let jsxData=null;
         if(this.props.category){
@@ -38,7 +41,7 @@ class Menu extends Component {
                       <CardTitle>{product.title}</CardTitle>
                       <CardSubtitle>Price:{product.price}</CardSubtitle>
                       {/* <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText> */}
-                      <Button>Add to cart</Button>
+                      <Button onClick={this.addToCart}>Add to cart</Button>
                     </CardBody>
                   </Card>)
             }) 
@@ -55,8 +58,10 @@ class Menu extends Component {
 
 function mapDispatchToProps(dispatch) {
     return {
-      addArticle: article => dispatch(addArticle(article))
+        increment: () => dispatch({ type: 'INCREMENT' }),
+        decrement: () => dispatch({ type: 'DECREMENT' }),
+        reset: () => dispatch({ type: 'RESET' })
     };
   }
  
-export default Menu;
+export default connect(null,null)(Menu);
