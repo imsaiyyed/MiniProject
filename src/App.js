@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
+import React,{Component} from 'react';
+import Navbar from './components/navbar';
+import Sidebar from './components/sidebar';
+import Menu from './components/Menu';
+import { Container, Row, Col } from 'reactstrap';
+
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state={
+    category:null
+  }
+
+  setCategory=(e)=>{
+    let newCategory=e.target.name;
+    if(newCategory=="all"){
+      this.setState({category:null})
+    }else{
+      this.setState({category:newCategory})
+    }
+  }
+  render(){
+    return (
+      <div className="App">
+          <Container>
+          <Row>
+            <Col><Navbar/></Col>
+          </Row>
+          <Row>
+            <Col xs="2"><Sidebar setCategory={this.setCategory}/></Col>
+            <Col><Menu category={this.state.category}/></Col>
+            {/* <Col><Sidebar/></Col>
+            <Col><Sidebar/></Col>
+            <Col><Sidebar/></Col>
+            <Col><Sidebar/></Col> */}
+          </Row>
+        
+        </Container>
+      </div>
+    );
+  }
+  
 }
 
 export default App;
